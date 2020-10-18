@@ -20,4 +20,8 @@ public class ProductService {
     public Product createProduct(@NotNull final Product product) {
         return productRepository.save(product);
     }
+
+    public Product getProduct(@NotNull Long productId) {
+        return productRepository.getOne(productId);
+    }
 }
