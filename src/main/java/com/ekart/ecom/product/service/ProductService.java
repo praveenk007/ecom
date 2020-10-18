@@ -5,6 +5,8 @@ import com.ekart.ecom.product.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author kamathp
  * @version 0.0.1
@@ -16,6 +18,6 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public Product createProduct(@NotNull final Product product) {
-        return  productRepository.save(product);
+        return productRepository.save(product);
     }
 }
