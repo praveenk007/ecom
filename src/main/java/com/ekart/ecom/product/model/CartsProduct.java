@@ -1,8 +1,9 @@
 package com.ekart.ecom.product.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
@@ -11,15 +12,19 @@ import javax.persistence.*;
  * @version 0.0.1
  */
 @Data
+@Builder
 @Entity
-@SuperBuilder
-@Table(name = "cart_products")
 @NoArgsConstructor
-public class CartProducts {
+@AllArgsConstructor
+@Table(name = "carts_products")
+public class CartsProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "units")
+    private Long units;
 
     @Column(name = "cart_id")
     private Long cartId;

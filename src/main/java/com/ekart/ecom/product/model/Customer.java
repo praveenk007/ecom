@@ -31,4 +31,8 @@ public class Customer {
     @OneToMany
     @JoinTable(name = "customers_address", joinColumns = {@JoinColumn(name = "customer_id")}, inverseJoinColumns = {@JoinColumn(name = "address_id")})
     private List<Address> address;
+
+    @OneToOne
+    @JoinTable(name = "customers_carts", joinColumns = {@JoinColumn(name = "customer_id")}, inverseJoinColumns = {@JoinColumn(name = "cart_id")})
+    private Cart cart;
 }

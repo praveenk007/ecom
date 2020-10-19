@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cart")
+@Table(name = "carts")
 public class Cart {
 
     @Id
@@ -28,11 +28,7 @@ public class Cart {
     @JoinTable(name = "customers", joinColumns = {@JoinColumn(name = "cart_id")}, inverseJoinColumns = {@JoinColumn(name = "customer_id")})
     private Customer customer;*/
 
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
     @OneToMany
-    @JoinTable(name = "cart_products", joinColumns = {@JoinColumn(name = "cart_id")}, inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    @JoinTable(name = "carts_products", joinColumns = {@JoinColumn(name = "cart_id")}, inverseJoinColumns = {@JoinColumn(name = "product_id")})
     private List<Product> products;
 }
