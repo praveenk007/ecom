@@ -1,12 +1,13 @@
 package com.ekart.ecom.product.model;
 
+import com.ekart.ecom.product.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
 
 /**
  * @author kamathp
@@ -35,7 +36,17 @@ public class Order {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany
-    @JoinTable(name = "products_order", joinColumns = {@JoinColumn(name = "order_id")}, inverseJoinColumns = {@JoinColumn(name = "product_id")})
-    private List<Product> products;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
+    private OrderStatus status;
+
+    private Date createdAt;
+
+    private Date expectedDeliveryDate;
 }
