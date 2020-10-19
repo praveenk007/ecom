@@ -2,6 +2,7 @@ package com.ekart.ecom.product.dto;
 
 import com.ekart.ecom.product.model.Brand;
 import com.ekart.ecom.product.model.Product;
+import com.ekart.ecom.product.model.ProductSpecification;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -46,6 +47,7 @@ public class ProductDTO {
     private Long vendorId;
 
     public Product toModel() {
+        ProductSpecification productSpecification = ProductSpecification.builder().color(this.getColor()).build();
         Product product = Product.builder()
                 .brand(Brand.builder().id(this.getBrandId()).build())
                 .description(this.getDescription())
@@ -56,7 +58,7 @@ public class ProductDTO {
                 .mrp(this.getMrp())
                 .qtyInStock(this.getQtyInStock())
                 .buyPrice(this.getBuyPrice())
-                .color(this.getColor())
+                .productSpecification(productSpecification)
                 .build();
         if(this.getId() != null) {
             product.setId(this.getId());
@@ -71,7 +73,7 @@ public class ProductDTO {
         return ProductDTO.builder()
                 .brandId(product.getBrand().getId())
                 .buyPrice(product.getBuyPrice())
-                .color(product.getColor())
+                .color(product.getProductSpecification().getColor())
                 .description(product.getDescription())
                 .displayName(product.getDisplayName())
                 .id(product.getId())

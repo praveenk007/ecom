@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -44,17 +44,18 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "color")
-    private String color;
-
     @Column(name = "is_active")
     private Boolean isActive;
 
     @ManyToOne
-    @JoinTable(name = "product_brand", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "brand_id")})
+    @JoinColumn(name = "brand_id")
     private Brand brand;
 
     @OneToOne
-    @JoinTable(name = "product_vendor", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "vendor_id")})
+    @JoinTable(name = "product_vendors", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "vendor_id")})
     private Vendor vendor;
+
+    @OneToOne
+    @JoinColumn(name = "product_specification_id")
+    private ProductSpecification productSpecification;
 }
