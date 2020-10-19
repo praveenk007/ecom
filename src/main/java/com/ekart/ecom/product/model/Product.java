@@ -48,14 +48,14 @@ public class Product {
     private Boolean isActive;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id")
+    @JoinTable(name = "products_brands", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "brand_id")})
     private Brand brand;
 
     @OneToOne
-    @JoinTable(name = "product_vendors", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "vendor_id")})
+    @JoinTable(name = "products_vendors", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "vendor_id")})
     private Vendor vendor;
 
-    @OneToOne
-    @JoinColumn(name = "product_specification_id")
-    private ProductSpecification productSpecification;
+    private String color;
+
+    private String model;
 }

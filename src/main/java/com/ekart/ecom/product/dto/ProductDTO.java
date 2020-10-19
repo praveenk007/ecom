@@ -2,9 +2,9 @@ package com.ekart.ecom.product.dto;
 
 import com.ekart.ecom.product.model.Brand;
 import com.ekart.ecom.product.model.Product;
-import com.ekart.ecom.product.model.ProductSpecification;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -22,8 +22,10 @@ public class ProductDTO {
 
     private String name;
 
+    @JsonProperty("brand_id")
     private Long brandId;
 
+    @JsonProperty("display_name")
     private String displayName;
 
     private String description;
@@ -36,18 +38,21 @@ public class ProductDTO {
 
     private Boolean isActive;
 
+    @JsonProperty("image_url")
     private String imageUrl;
 
+    @JsonProperty("qty_in_stock")
     private Long qtyInStock;
 
+    @JsonProperty("buy_price")
     private Double buyPrice;
 
     private Double mrp;
 
+    @JsonProperty("vendor_id")
     private Long vendorId;
 
     public Product toModel() {
-        ProductSpecification productSpecification = ProductSpecification.builder().color(this.getColor()).build();
         Product product = Product.builder()
                 .brand(Brand.builder().id(this.getBrandId()).build())
                 .description(this.getDescription())
@@ -58,7 +63,7 @@ public class ProductDTO {
                 .mrp(this.getMrp())
                 .qtyInStock(this.getQtyInStock())
                 .buyPrice(this.getBuyPrice())
-                .productSpecification(productSpecification)
+                .color(this.getColor())
                 .build();
         if(this.getId() != null) {
             product.setId(this.getId());
@@ -73,7 +78,7 @@ public class ProductDTO {
         return ProductDTO.builder()
                 .brandId(product.getBrand().getId())
                 .buyPrice(product.getBuyPrice())
-                .color(product.getProductSpecification().getColor())
+                .color(product.getColor())
                 .description(product.getDescription())
                 .displayName(product.getDisplayName())
                 .id(product.getId())
