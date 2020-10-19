@@ -9,12 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.NoSuchElementException;
+
 /**
  * @author kamathp
  * @version 0.0.1
  */
 @RestController
-@RequestMapping("/api/product/0.1")
+@RequestMapping("/api/product/v1.0")
 public class ProductController {
 
     @Autowired
@@ -30,13 +32,17 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Response<ProductDTO>> get(@PathVariable("id") final Long id) {
-        final Product product = productService.getProduct(id);
+        Product product;
         final Response<ProductDTO> response = new Response<>();
-        if(null == product) {
+        try {
+            product = productService.getProduct(id)
+                .orElseThrow();
+            response.setData(ProductDTO.toDTO(product));
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (NoSuchElementException e) {
             response.setMessage("Product not found for id " + id);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
-        response.setData(ProductDTO.toDTO(product));
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+
     }
 }

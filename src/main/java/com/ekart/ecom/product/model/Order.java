@@ -28,20 +28,20 @@ public class Order {
     @Column(name = "customer_id")
     private Long customerId;*/
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @OneToOne
+    @JoinTable(name = "customers_orders", joinColumns = {@JoinColumn(name = "order_id")}, inverseJoinColumns = {@JoinColumn(name = "customer_id")})
     private Customer customer;
 
     @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @JoinTable(name = "orders_address", joinColumns = {@JoinColumn(name = "order_id")}, inverseJoinColumns = {@JoinColumn(name = "to_address_id")})
+    private Address shipTo;
 
     @OneToOne
-    @JoinColumn(name = "product_id")
+    @JoinTable(name = "orders_products", joinColumns = {@JoinColumn(name = "order_id")}, inverseJoinColumns = {@JoinColumn(name = "product_id")})
     private Product product;
 
     @OneToOne
-    @JoinColumn(name = "payment_id")
+    @JoinTable(name = "orders_payments", joinColumns = {@JoinColumn(name = "order_id")}, inverseJoinColumns = {@JoinColumn(name = "payment_id")})
     private Payment payment;
 
     private OrderStatus status;

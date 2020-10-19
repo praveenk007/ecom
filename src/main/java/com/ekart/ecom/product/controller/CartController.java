@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 0.0.1
  */
 @RestController
-@RequestMapping("/api/0.1/cart")
+@RequestMapping("/api/cart/v1.0")
 public class CartController {
 
     @Autowired

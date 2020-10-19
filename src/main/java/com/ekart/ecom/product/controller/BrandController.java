@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 0.0.1
  */
 @RestController
-@RequestMapping("/api/brand/0.1")
+@RequestMapping("/api/brand/v1.0")
 public class BrandController {
 
     @Autowired

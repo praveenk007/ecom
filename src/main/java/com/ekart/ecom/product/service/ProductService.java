@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 /**
  * @author kamathp
@@ -21,7 +22,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product getProduct(@NotNull Long productId) {
-        return productRepository.getOne(productId);
+    public Optional<Product> getProduct(@NotNull Long productId) {
+        return productRepository.findById(productId);
     }
 }

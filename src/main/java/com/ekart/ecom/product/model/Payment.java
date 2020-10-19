@@ -30,7 +30,7 @@ public class Payment {
     @Column(name = "status")
     private PaymentStatus status;
 
-    private Long amount;
+    private Double amount;
 
     /**
      * You can pay some part from your wallet and remaining from other pay mode
