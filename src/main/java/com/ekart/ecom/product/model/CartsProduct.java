@@ -31,4 +31,8 @@ public class CartsProduct {
 
     @Column(name = "product_id")
     private Long productId;
+
+    @ManyToOne
+    @JoinTable(name = "products", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "id")})
+    private Product product;
 }
